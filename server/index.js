@@ -23,8 +23,14 @@ app.use(cookieParser())
 app.use(cors({
     origin: ['http://localhost:3000','https://mern-blog-client-gvbw.onrender.com'],
     credentials:true,
-    methods:["GET","POST","PATCH","PUT","DELETE"]
+    methods:["GET","POST","PATCH","PUT","DELETE"],
+
 }))
+
+app.use(function (req, res, next){
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "*")
+})
 
 app.use('/uploads',express.static(path.join(__dirname,'/uploads')));
 
