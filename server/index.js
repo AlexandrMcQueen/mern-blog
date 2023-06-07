@@ -27,6 +27,11 @@ app.use(cors({
 
 }))
 
+app.use((req, res, next) => {
+    res.setHeader('Access-Control-Allow-Credentials', 'true');
+    next();
+});
+
 
 
 app.use('/uploads',express.static(path.join(__dirname,'/uploads')));

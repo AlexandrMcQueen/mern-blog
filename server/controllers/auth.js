@@ -64,12 +64,7 @@ export const login = async (req,res) => {
         jwt.sign({username, id:user._id}, process.env.JWT_SECRET, {expiresIn: '30d'},(err,token) => {
             if (err) throw err;
 
-            res.status(200).cookie('token',token,{
-                sameSite : "none",
-                secure: true,
-                domain: ".onrender.com",
-                httpOnly: true
-            }).json('ok')
+            res.status(200).cookie('token',token).json('ok');
         })
 
 
