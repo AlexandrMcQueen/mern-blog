@@ -11,7 +11,7 @@ const MainPage = () => {
         async function getPosts () {
             try {
                 setLoading(true)
-                const {data} = await axios.get('http://localhost:5000/post',{withCredentials:true});
+                const {data} = await axios.get('https://mern-blog-2-9fsg.onrender.com/post',{withCredentials:true});
                 setPosts(data);
 
             } catch (err) {

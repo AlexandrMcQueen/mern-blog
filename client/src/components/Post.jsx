@@ -13,7 +13,7 @@ const Post = ({_id,title,summary,createdAt,cover,content,author}) => {
         <div className='post'>
             <div className='image'>
                 <Link to={`/post/${_id}`}>
-                    <img src={`http://localhost:5000/uploads/`+cover} alt="ImagePost"/>
+                    <img src={`https://mern-blog-2-9fsg.onrender.com/uploads/`+cover} alt="ImagePost"/>
                 </Link>
             </div>
             <div className='texts'>

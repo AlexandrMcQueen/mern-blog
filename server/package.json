@@ -16,6 +16,7 @@
     "react-skeleton": "^2.2.1"
   },
   "scripts": {
-    "start": "nodemon index.js"
+    "start": "nodemon index.js",
+    "build": "yarn add"
   }
 }

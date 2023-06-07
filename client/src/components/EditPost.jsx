@@ -65,7 +65,7 @@ const EditPost = () => {
 
         const res = await axios({
             method:'PUT',
-            url:"http://localhost:5000/post",
+            url:"https://mern-blog-2-9fsg.onrender.com/post",
             headers:  { "Content-Type": "multipart/form-data" },
             data: data,
             withCredentials:true,

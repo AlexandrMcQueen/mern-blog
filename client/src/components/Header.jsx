@@ -7,13 +7,13 @@ const Header = () => {
     const {userInfo,setUserInfo} = useContext(UserContext);
 
     async function logout() {
-        await axios.post('http://localhost:5000/logout',{},{withCredentials:true});
+        await axios.post('https://mern-blog-2-9fsg.onrender.com/logout',{},{withCredentials:true});
         setUserInfo(null);
     }
 
     useEffect(() => {
         async function getUserInfo() {
-            const {data} = await axios.get('http://localhost:5000/profile',{withCredentials:true})
+            const {data} = await axios.get('https://mern-blog-2-9fsg.onrender.com/profile',{withCredentials:true})
             setUserInfo(data);
 
         }
