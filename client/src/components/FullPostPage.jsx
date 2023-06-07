@@ -72,7 +72,7 @@ const FullPostPage = () => {
           )}
 
           <div className='image'>
-              <img src={`http://localhost:5000/uploads/${postInfo.cover}`} alt=""/>
+              <img src={`https://mern-blog-2-9fsg.onrender.com/uploads/${postInfo.cover}`} alt=""/>
           </div>
 
 
