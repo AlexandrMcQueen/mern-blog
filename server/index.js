@@ -21,7 +21,7 @@ app.use(express.json())
 app.use(morgan('dev'))
 app.use(cookieParser())
 app.use(cors({
-    origin: ['http://localhost:3000','https://mern-blog-client-gvbw.onrender.com/'],
+    origin: ['http://localhost:3000','https://mern-blog-client-gvbw.onrender.com'],
     credentials:true,
     methods:["GET","POST","PATCH","PUT","DELETE"]
 }))
