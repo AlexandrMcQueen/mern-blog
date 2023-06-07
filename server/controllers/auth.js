@@ -99,7 +99,7 @@ export const logout = async (req,res) => {
 
     try {
 
-        res.cookie('token','').json('ok');
+        res.clearCookie('token').json('ok');
 
 
     } catch (e) {
