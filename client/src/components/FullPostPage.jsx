@@ -16,7 +16,7 @@ const FullPostPage = () => {
     useEffect( () => {
 
         async function getSinglePost() {
-            const {data} = await axios.get(`https://mern-blog-2-9fsg.onrender.com/post/${id}`);
+            const {data} = await axios.get(`https://mern-blog-2-9fsg.onrender.com/post/${id}`,{withCredentials:true});
             setPostInfo(data);
         }
       getSinglePost()
