@@ -84,7 +84,7 @@ export const profile = async (req,res) => {
     const {token} = req.cookies;
     try {
         if (token) {
-           const verifiedToken = await  jwt.verify(token,process.env.JWT_SECRET);
+           const verifiedToken = await jwt.verify(token,process.env.JWT_SECRET);
            res.json(verifiedToken);
         }
 
@@ -99,7 +99,7 @@ export const logout = async (req,res) => {
 
     try {
 
-        res.clearCookie('token').json('ok');
+        await res.clearCookie('token').json('ok');
 
 
     } catch (e) {
