@@ -33,7 +33,6 @@ const CommentsSection = ({post}) => {
         })
         if (request.status === 200) {
             setComment('');
-            window.location.reload()
         } else {
             alert('Cannot add a comment')
         }
