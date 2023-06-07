@@ -67,7 +67,7 @@ export const login = async (req,res) => {
             res.status(200).cookie('token',token,{
                 sameSite : "none",
                 secure: true,
-                domain: "mern-blog-client-gvbw",
+                domain: "mern-blog-client-gvbw.onrender.com",
                 httpOnly: true
             }).json('ok')
         })
