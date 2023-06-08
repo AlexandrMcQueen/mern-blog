@@ -34,7 +34,7 @@ const EditPost = () => {
     useEffect(()=> {
         async function getPostInfo() {
             try {
-                const {data} = await axios.get(`http://localhost:5000/post/${id}`);
+                const {data} = await axios.get(`https://mern-blog-2-9fsg.onrender.com/post/${id}`);
                 console.log(data);
                 setTitle(data.title);
                 setSummary(data.summary);
