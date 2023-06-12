@@ -13,7 +13,7 @@ const Post = ({_id,title,summary,createdAt,cover,content,author}) => {
         <div className='post'>
             <div className='image'>
                 <Link to={`/post/${_id}`}>
-                    <img src={`${process.env.REACT_BASE_URL}/uploads/`+cover} alt="ImagePost"/>
+                    <img src={`https://mern-blog-2-9fsg.onrender.com/uploads/`+cover} alt="ImagePost"/>
                 </Link>
             </div>
             <div className='texts'>

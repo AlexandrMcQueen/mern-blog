@@ -44,7 +44,7 @@ const CreatePost = () => {
 
         const res = await axios({
             method:'POST',
-            url:`${process.env.REACT_BASE_URL}/post`,
+            url:`https://mern-blog-2-9fsg.onrender.com/post`,
             data: data,
             headers: { "Content-Type": "multipart/form-data" },
             withCredentials:true

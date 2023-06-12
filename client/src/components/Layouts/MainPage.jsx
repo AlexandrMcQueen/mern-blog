@@ -2,7 +2,6 @@ import React, {useEffect, useState} from 'react';
 import Post from "../Post";
 import axios from "axios";
 import Skeleton from "../Skeleton";
-import dotenv from 'dotenv/config'
 
 const MainPage = () => {
 
@@ -12,7 +11,7 @@ const MainPage = () => {
         async function getPosts () {
             try {
                 setLoading(true)
-                const {data} = await axios.get(`${process.env.REACT_BASE_URL}/post`,{withCredentials:true});
+                const {data} = await axios.get(`https://mern-blog-2-9fsg.onrender.com/post`,{withCredentials:true});
                 setPosts(data);
 
             } catch (err) {

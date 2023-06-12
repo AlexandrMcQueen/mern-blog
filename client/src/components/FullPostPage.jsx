@@ -16,7 +16,7 @@ const FullPostPage = () => {
     useEffect( () => {
 
         async function getSinglePost() {
-            const {data} = await axios.get(`${process.env.REACT_BASE_URL}/post/${id}`,{withCredentials:true});
+            const {data} = await axios.get(`https://mern-blog-2-9fsg.onrender.com/post/${id}`,{withCredentials:true});
             setPostInfo(data);
         }
       getSinglePost()
@@ -24,7 +24,7 @@ const FullPostPage = () => {
 
     async function deletePost () {
         try {
-            const res = await axios.delete(`${process.env.REACT_BASE_URL}/post/${id}`,{withCredentials:true});
+            const res = await axios.delete(`https://mern-blog-2-9fsg.onrender.com/post/${id}`,{withCredentials:true});
             if (res.status === 200) {
                setRedirect(true)
             } else {
