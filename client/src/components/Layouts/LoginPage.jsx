@@ -12,7 +12,7 @@ const LoginPage = () => {
     const {setUserInfo} = useContext(UserContext);
 
     async function getUserInfo() {
-        const {data} = await axios.get('https://mern-blog-2-9fsg.onrender.com/profile',{withCredentials:true})
+        const {data} = await axios.get(`${process.env.REACT_BASE_URL}/profile`,{withCredentials:true})
         setUserInfo(data);
 
     }
@@ -22,7 +22,7 @@ const LoginPage = () => {
         try {
             const response = await axios({
                 method: 'POST',
-                url:'https://mern-blog-2-9fsg.onrender.com/login',
+                url:`${process.env.REACT_BASE_URL}/login`,
                 withCredentials:true,
                 data: JSON.stringify({username,password}),
                 headers:{'Content-Type':'application/json'},

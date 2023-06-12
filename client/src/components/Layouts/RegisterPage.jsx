@@ -10,7 +10,7 @@ const RegisterPage = () => {
     async function register(e) {
         e.preventDefault();
         try {
-            const response = await axios.post('https://mern-blog-2-9fsg.onrender.com/register',{username,password});
+            const response = await axios.post(`${process.env.REACT_BASE_URL}/register`,{username,password});
             if (response.status === 201) {
                 setRedirect(true);
             }

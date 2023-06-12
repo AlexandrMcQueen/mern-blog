@@ -26,7 +26,7 @@ const CommentsSection = ({post}) => {
 
         const request = await axios({
             method:"POST",
-            url:'https://mern-blog-2-9fsg.onrender.com/post/comment',
+            url:`${process.env.REACT_BASE_URL}/post/comment`,
             data:values,
             withCredentials:true,
 

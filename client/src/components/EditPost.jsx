@@ -34,7 +34,7 @@ const EditPost = () => {
     useEffect(()=> {
         async function getPostInfo() {
             try {
-                const {data} = await axios.get(`https://mern-blog-2-9fsg.onrender.com/post/${id}`);
+                const {data} = await axios.get(`${process.env.REACT_BASE_URL}/post/${id}`);
                 console.log(data);
                 setTitle(data.title);
                 setSummary(data.summary);
@@ -65,7 +65,7 @@ const EditPost = () => {
 
         const res = await axios({
             method:'PUT',
-            url:"https://mern-blog-2-9fsg.onrender.com/post",
+            url:`${process.env.REACT_BASE_URL}/post`,
             headers:  { "Content-Type": "multipart/form-data" },
             data: data,
             withCredentials:true,
