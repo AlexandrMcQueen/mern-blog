@@ -13,6 +13,10 @@ const app = express();
 
 
 
+// Serve static files
+
+
+
 // CONFIGURATIONS
 const __filename  = fileURLToPath(import.meta.url);
 const __dirname =  path.dirname(__filename);
@@ -27,6 +31,16 @@ app.use(cors({
 
 }))
 
+
+app.use('/',authRoutes);
+app.use('/',postRoutes)
+
+app.use(express.static(path.join(__dirname, 'build')));
+
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'build', 'index.html'));
+});
+
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Credentials', 'true');
     next();
@@ -38,6 +52,8 @@ app.use('/uploads',express.static(path.join(__dirname,'/uploads')));
 
 
 mongoose.connect(process.env.MONGO_URL,{
+    useNewUrlParser:true,
+    useUnifiedTopology:true
 
 })
     .then(() => console.log('DB IS WORKING'))
@@ -45,5 +61,3 @@ mongoose.connect(process.env.MONGO_URL,{
     .catch((err) => console.error(err));
 
 
-app.use('/',authRoutes);
-app.use('/',postRoutes)
