@@ -1,74 +1,54 @@
-import React, { useContext, useState, useEffect } from 'react';
-import axios from 'axios';
-import { UserContext } from './UserContext';
-import io from 'socket.io-client';
+import React, {useContext, useState} from 'react';
+import {UserContext} from "./UserContext";
+import axios from "axios";
+import {Navigate} from "react-router-dom";
 
-const CommentsSection = ({ post }) => {
-    const [commentList, setCommentList] = useState([]);
-    const [comment, setComment] = useState('');
+const CommentsSection = ({post}) => {
+    const [comment,setComment] = useState('');
 
-    const { userInfo } = useContext(UserContext);
-
-    const socket = io.connect('http://localhost:5000'); // Replace with your server URL
-
-    const addComment = (e) => {
+    const {userInfo} = useContext(UserContext);
+    async function addComment(e) {
         e.preventDefault();
 
+
         if (!userInfo.id || !comment || !post) {
-            alert('You must be authorized and add a comment');
+            alert(`You must to authorize or add a comment`);
             return;
         }
 
-        const commentData = {
+        const values = {
             comment,
-            author: userInfo,
-            postId: post?._id,
-        };
+            author:userInfo,
+            postId:post?._id
+        }
 
-        // Emit the comment event
-        socket.emit('comment', commentData);
+        console.log(values);
 
-        setComment('');
-    };
+        const request = await axios({
+            method:"POST",
+            url:`https://mern-blog-2-9fsg.onrender.com/post/comment`,
+            data:values,
+            withCredentials:true,
 
-    useEffect(() => {
-        // Fetch the initial comments from the server
-
-        // Listen for new comment events
-        socket.on('newComment', (newComment) => {
-            // Update the comment list with the new comment
-            setCommentList((prevComments) => [...prevComments, newComment]);
-        });
-
-        return () => {
-            // Clean up the event listener when the component unmounts
-            socket.off('newComment');
-        };
-    }, [socket]);
+        })
+        if (request.status === 200) {
+            setComment('');
+        } else {
+            alert('Cannot add a comment')
+        }
+    }
 
     return (
-        <div style={{ marginTop: '50px' }}>
-            {/* Render the comment list */}
-            {commentList.map((comment) => (
-                <div key={comment._id}>
-                    <p>{comment.author.username}</p>
-                    <p>{comment.comment}</p>
-                </div>
-            ))}
+        <div style={{marginTop:'50px'}}>
+             <form style={{marginTop:'20px'}} onSubmit={addComment}>
+                 <input value={comment} onChange={e => setComment(e.target.value)} type="text" placeholder='add a comment '/>
 
-            <form style={{ marginTop: '20px' }} onSubmit={addComment}>
-                <input
-                    value={comment}
-                    onChange={(e) => setComment(e.target.value)}
-                    type="text"
-                    placeholder="Add a comment"
-                />
+                 <div className='comment-btns'>
+                     <button type={"submit"}>Comment</button>
+                     <button type={"reset"}>Cancel</button>
+                 </div>
 
-                <div className="comment-btns">
-                    <button type="submit">Comment</button>
-                    <button type="reset">Cancel</button>
-                </div>
-            </form>
+             </form>
         </div>
     );
 };
