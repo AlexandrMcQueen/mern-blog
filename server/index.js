@@ -8,8 +8,17 @@ import morgan from 'morgan';
 import cookieParser from 'cookie-parser';
 import {fileURLToPath} from "url";
 import path from "path";
+import http from 'http';
+import PostSchema from "./models/Post.js";
+import {Server,Socket} from 'socket.io'
+
 
 const app = express();
+const server = http.createServer(app);
+const io = new Server(server,{
+    origin: ['http://localhost:3000','https://mern-blog-client-gvbw.onrender.com'],
+
+});
 
 
 
@@ -41,9 +50,50 @@ mongoose.connect(process.env.MONGO_URL,{
 
 })
     .then(() => console.log('DB IS WORKING'))
-    .then(() => app.listen(process.env.PORT),() =>console.log(`Server listening ${process.env.PORT}`))
     .catch((err) => console.error(err));
+
+io.on('connection', (socket) => {
+    console.log('A user connected');
+
+    // Listen for comment events
+    socket.on('comment', async (commentData) => {
+        try {
+            // Save the comment to MongoDB
+            const comment = {
+                postId: commentData.postId,
+                author: commentData.author,
+                comment: commentData.comment,
+            };
+
+            // Save the comment to MongoDB using your existing code or Mongoose methods
+            // Example:
+            // const newComment = await Comment.create(comment);
+            const post = await PostSchema.findById(postId);
+
+            await post.comments.push({
+                comment,
+                author
+            });
+            const updatedPost = await PostSchema.findByIdAndUpdate(postId,post,{new:true});
+
+
+            // Broadcast the comment to all connected clients
+            io.emit('newComment', newComment);
+
+            console.log('New comment:', newComment);
+        } catch (error) {
+            console.error('Failed to save comment:', error);
+        }
+    });
+
+    // ... Other socket event handlers ...
+});
 
 
 app.use('/',authRoutes);
-app.use('/',postRoutes)
+app.use('/',postRoutes);
+
+
+server.listen(process.env.PORT, () => {
+    console.log(`Server listening on port ${process.env.PORT}`);
+});
