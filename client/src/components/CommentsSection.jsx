@@ -9,7 +9,7 @@ const CommentsSection = ({ post }) => {
 
     const { userInfo } = useContext(UserContext);
 
-    const socket = io.connect('http://localhost:5000'); // Replace with your server URL
+    const socket = io.connect('https://mern-blog-client-gvbw.onrender.com/'); // Replace with your server URL
 
     const addComment = (e) => {
         e.preventDefault();
