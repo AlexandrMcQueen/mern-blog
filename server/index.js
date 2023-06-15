@@ -10,10 +10,13 @@ import {fileURLToPath} from "url";
 import path from "path";
 
 const app = express();
+<<<<<<< HEAD
 
 
 
 // Serve static files
+=======
+>>>>>>> 8b582ed18f56a71b512d877baac2edb7a6a6f6bf
 
 
 
@@ -61,3 +64,8 @@ mongoose.connect(process.env.MONGO_URL,{
     .catch((err) => console.error(err));
 
 
+<<<<<<< HEAD
+=======
+app.use('/',authRoutes);
+app.use('/',postRoutes)
+>>>>>>> 8b582ed18f56a71b512d877baac2edb7a6a6f6bf
