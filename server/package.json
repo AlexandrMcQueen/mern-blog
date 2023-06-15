@@ -18,6 +18,6 @@
   },
   "scripts": {
     "start": "nodemon index.js",
-    "build": "yarn add"
+    "build": "npm build "
   }
 }

@@ -1,71 +1,67 @@
-import express from 'express';
-import mongoose from "mongoose";
-import cors from 'cors';
-import authRoutes from './routes/auth.js';
-import postRoutes from './routes/post.js';
-import dotenv from 'dotenv';
-import morgan from 'morgan';
-import cookieParser from 'cookie-parser';
-import {fileURLToPath} from "url";
-import path from "path";
+    import express from 'express';
+    import mongoose from "mongoose";
+    import cors from 'cors';
+    import authRoutes from './routes/auth.js';
+    import postRoutes from './routes/post.js';
+    import dotenv from 'dotenv';
+    import morgan from 'morgan';
+    import cookieParser from 'cookie-parser';
+    import {fileURLToPath} from "url";
+    import path from "path";
 
-const app = express();
-<<<<<<< HEAD
-
-
-
-// Serve static files
-=======
->>>>>>> 8b582ed18f56a71b512d877baac2edb7a6a6f6bf
+    const app = express();
 
 
 
-// CONFIGURATIONS
-const __filename  = fileURLToPath(import.meta.url);
-const __dirname =  path.dirname(__filename);
-dotenv.config();
-app.use(express.json())
-app.use(morgan('dev'))
-app.use(cookieParser())
-app.use(cors({
-    origin: ['http://localhost:3000','https://mern-blog-client-gvbw.onrender.com'],
-    credentials:true,
-    methods:["GET","POST","PATCH","PUT","DELETE"],
-
-}))
-
-
-app.use('/',authRoutes);
-app.use('/',postRoutes)
-
-app.use(express.static(path.join(__dirname, 'build')));
-
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'build', 'index.html'));
-});
-
-app.use((req, res, next) => {
-    res.setHeader('Access-Control-Allow-Credentials', 'true');
-    next();
-});
+    // Serve static files
 
 
 
-app.use('/uploads',express.static(path.join(__dirname,'/uploads')));
+    // CONFIGURATIONS
+    const __filename  = fileURLToPath(import.meta.url);
+    const __dirname =  path.dirname(__filename);
+    dotenv.config();
+    app.use(express.json())
+    app.use(morgan('dev'))
+    app.use(cookieParser())
+    app.use(cors({
+        origin: ['http://localhost:3000','https://mern-blog-client-gvbw.onrender.com'],
+        credentials:true,
+        methods:["GET","POST","PATCH","PUT","DELETE"],
+
+    }))
 
 
-mongoose.connect(process.env.MONGO_URL,{
-    useNewUrlParser:true,
-    useUnifiedTopology:true
+    app.use('/',authRoutes);
+    app.use('/',postRoutes)
 
-})
-    .then(() => console.log('DB IS WORKING'))
-    .then(() => app.listen(process.env.PORT),() =>console.log(`Server listening ${process.env.PORT}`))
-    .catch((err) => console.error(err));
+    app.use(express.static(path.join(__dirname, 'build')));
+
+    // Serve the index.html file for all routes except API routes
+    app.get(/^(?!\/api\/).*/, (req, res) => {
+        res.sendFile(path.join(__dirname, 'build', 'index.html'));
+    });
+
+    app.use((req, res, next) => {
+        res.setHeader('Access-Control-Allow-Credentials', 'true');
+        next();
+    });
 
 
-<<<<<<< HEAD
-=======
-app.use('/',authRoutes);
-app.use('/',postRoutes)
->>>>>>> 8b582ed18f56a71b512d877baac2edb7a6a6f6bf
+
+    app.use('/uploads',express.static(path.join(__dirname,'/uploads')));
+
+
+    mongoose.connect(process.env.MONGO_URL,{
+        useNewUrlParser:true,
+        useUnifiedTopology:true
+
+    })
+        .then(() => console.log('DB IS WORKING'))
+        .then(() => app.listen(process.env.PORT),() =>console.log(`Server listening ${process.env.PORT}`))
+        .catch((err) => console.error(err));
+
+
+
+    app.use('/',authRoutes);
+    app.use('/',postRoutes)
