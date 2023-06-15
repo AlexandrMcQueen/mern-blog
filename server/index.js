@@ -32,13 +32,6 @@
     }))
 
 
-    app.use(express.static(path.join(__dirname, 'build')));
-
-    // Serve the index.html file as a fallback for all other routes
-    app.get('*', (req, res) => {
-        res.sendFile(path.resolve(__dirname, 'build', 'index.html'));
-    });
-
 
 
 
