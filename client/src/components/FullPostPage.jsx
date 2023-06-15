@@ -79,18 +79,6 @@ const FullPostPage = () => {
           <div className='content' style={{lineHeight:'1.6rem',maxWidth:'700'}} dangerouslySetInnerHTML={{__html:postInfo.content}}></div>
           <CommentsSection post={postInfo}/>
 
-          <div style={{marginTop:'10px'}}>
-              Comments:
-              {
-                  postInfo?.comments.map((com,i) => {
-                      return  <>
-                                <p  className='comment'>{com?.author?.username} : {com.comment}</p>
-                              </>
-
-                  })
-              }
-
-          </div>
 
       </div>
 

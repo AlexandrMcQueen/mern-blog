@@ -4,9 +4,13 @@ import axios from "axios";
 import {Navigate} from "react-router-dom";
 
 const CommentsSection = ({post}) => {
+    const [commentList,setCommentList] = useState([]);
     const [comment,setComment] = useState('');
 
+    const {comments} = post;
+
     const {userInfo} = useContext(UserContext);
+
     async function addComment(e) {
         e.preventDefault();
 
@@ -22,7 +26,11 @@ const CommentsSection = ({post}) => {
             postId:post?._id
         }
 
-        console.log(values);
+
+        comments.push(values);
+
+
+
 
         const request = await axios({
             method:"POST",
@@ -34,7 +42,7 @@ const CommentsSection = ({post}) => {
         if (request.status === 200) {
             setComment('');
         } else {
-            alert('Cannot add a comment')
+            alert('Cannot add a comment');
         }
     }
 
@@ -49,6 +57,20 @@ const CommentsSection = ({post}) => {
                  </div>
 
              </form>
+
+            <div style={{marginTop:'10px'}}>
+                Comments:
+                {
+                    post?.comments.map((com,i) => {
+                        return  <>
+                            <p  className='comment'>{com?.author?.username} : {com.comment}</p>
+                        </>
+
+                    })
+                }
+
+            </div>
+
         </div>
     );
 };
