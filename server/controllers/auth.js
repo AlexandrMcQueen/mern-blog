@@ -66,7 +66,7 @@ export const login = async (req,res) => {
 
             res.cookie('token',token,{
                 sameSite:"none",
-                expiresIn: '1d',
+                expiresIn: '1h',
                 httpOnly:true,
                 secure:true
             }).json('ok');
@@ -100,7 +100,12 @@ export const logout = async (req,res) => {
 
     try {
 
-        await res.clearCookie('token').json('ok');
+        await res.clearCookie('token',{
+            sameSite:"none",
+            expiresIn: '1h',
+            httpOnly:true,
+            secure:true
+        }).json('ok');
 
 
     } catch (e) {
