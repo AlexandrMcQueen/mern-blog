@@ -35,12 +35,7 @@
     app.use('/',authRoutes);
     app.use('/',postRoutes)
 
-    app.use(express.static(path.join(__dirname, 'build')));
 
-    // Serve the index.html file for all routes except API routes
-    app.get(/^(?!\/api\/).*/, (req, res) => {
-        res.sendFile(path.join(__dirname, 'build', 'index.html'));
-    });
 
     app.use((req, res, next) => {
         res.setHeader('Access-Control-Allow-Credentials', 'true');
